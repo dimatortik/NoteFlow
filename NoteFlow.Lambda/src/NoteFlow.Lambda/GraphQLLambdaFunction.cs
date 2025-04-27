@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Amazon.Lambda.Core;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ using NoteFlow.Application.UseCases.Users.Create;
 using NoteFlow.Application.UseCases.Users.Delete;
 using NoteFlow.Application.UseCases.Users.Get;
 using NoteFlow.Application.UseCases.Users.Update;
+using NoteFlow.Domain.Abstractions;
 using NoteFlow.Lambda.Helpers;
 using NoteFlow.Lambda.Models;
 using NoteFlow.Lambda.Models.Note;
@@ -56,7 +58,7 @@ public class GraphQlLambdaFunction
             return new GraphQlError
             {
                 Message = ex.Message,
-                ErrorType = "ServerError",
+                Code = "ServerError",
                 Path = request.Field
             };
         }
@@ -76,11 +78,18 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+            return new GetUserResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                User = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field
+                    }
+                ]
             };
         }
 
@@ -106,11 +115,18 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+            return new CreateUserResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                User = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field
+                    }
+                ]
             };
         }
 
@@ -134,11 +150,18 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+            return new UpdateUserResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                User = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field
+                    }
+                ]
             };
         }
 
@@ -162,17 +185,24 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+            return new DeleteUserResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                UserId = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field
+                    }
+                ]
             };
         }
 
         return new DeleteUserResult
         {
-            UserId = userId,
+            UserId = result.Value!,
             Errors = null
         };
     }
@@ -191,11 +221,18 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+            return new GetNoteResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                Note = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field,
+                    }
+                ]
             };
         }
 
@@ -212,19 +249,32 @@ public class GraphQlLambdaFunction
 
         if (userId == null)
         {
-            return GraphQlError.DeserializationError(request.Field);
+            return new GetUserNotesResult()
+            {
+                Notes = null,
+                Errors =
+                [
+                    GraphQlError.DeserializationError(request.Field)
+                ]
+            };
         }
-        int pageSize = 10;
+        int pageSize = 3;
         string? continuationToken = null;
 
         if (request.Arguments.TryGetValue("pageSize", out var argument))
-        {
-            pageSize = Convert.ToInt32(argument);
+        { 
+            if (argument is JsonElement pageSizeElement && pageSizeElement.ValueKind == JsonValueKind.Number)
+            {
+                pageSize = pageSizeElement.GetInt32();
+            }
         }
 
         if (request.Arguments.TryGetValue("continuationToken", out var requestArgument))
         {
-            continuationToken = requestArgument.ToString();
+            if (requestArgument is JsonElement tokenElement && tokenElement.ValueKind == JsonValueKind.String)
+            {
+                continuationToken = tokenElement.GetString();
+            }
         }
 
         var result = await _mediator.Send(new GetAllNotesByUserIdQuery(
@@ -234,11 +284,18 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+            return new GetUserNotesResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                Notes = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field
+                    }
+                ]
             };
         }
 
@@ -261,11 +318,18 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+            return new CreateNoteResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                Note = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field
+                    }
+                ]
             };
         }
 
@@ -289,11 +353,18 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+            return new UpdateNoteResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                Note = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field
+                    }
+                ]
             };
         }
 
@@ -318,11 +389,19 @@ public class GraphQlLambdaFunction
 
         if (result.IsFailure)
         {
-            return new GraphQlError
+
+            return new DeleteNoteResult()
             {
-                Message = result.Error.Message,
-                ErrorType = result.Error.Code,
-                Path = request.Field
+                NoteId = null,
+                Errors =
+                [
+                    new GraphQlError
+                    {
+                        Message = result.Error.Message,
+                        Code = result.Error.Code,
+                        Path = request.Field
+                    }
+                ]
             };
         }
 

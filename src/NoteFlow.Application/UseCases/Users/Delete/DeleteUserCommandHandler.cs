@@ -9,7 +9,18 @@ public class DeleteUserCommandHandler(DynamoDBContext context) : ICommandHandler
 {
     public async Task<Result<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        await context.DeleteAsync<User>(request.Id, cancellationToken);
+        var notes = await context.QueryAsync<Note>(request.Id).GetRemainingAsync(cancellationToken);
+        
+        var batchWrite = context.CreateBatchWrite<Note>();
+        foreach (var note in notes)
+        {
+            await context.DeleteAsync(note, cancellationToken);
+        }
+        await Task.WhenAll(
+            batchWrite.ExecuteAsync(cancellationToken),
+            context.DeleteAsync<User>(request.Id, cancellationToken: cancellationToken)
+        );
+        
         return Result.Success(request.Id);
     }
 }

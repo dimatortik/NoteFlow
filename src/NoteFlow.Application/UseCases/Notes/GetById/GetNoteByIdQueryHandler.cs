@@ -10,7 +10,7 @@ public class GetNoteByIdQueryHandler(DynamoDBContext context) : IQueryHandler<Ge
 {
     public async Task<Result<NoteResponse>> Handle(GetNoteByIdQuery request, CancellationToken cancellationToken)
     {
-        var note = await context.LoadAsync<Note>(request.Id, request.UserId, cancellationToken);
+        var note = await context.LoadAsync<Note>(request.UserId, request.Id, cancellationToken);
         if (note is null)
         {
             return Result.Failure<NoteResponse>(new Error("NoteNotFound", $"Note with Id : {request.Id} not found"));

@@ -2,7 +2,7 @@ type User {
     id: ID!
     name: String!
     email: String!
-    createdAt: String!
+    createdAt: String
     updatedAt: String
 }
 
@@ -10,9 +10,9 @@ type Note {
     id: ID!
     title: String!
     content: String!
-    createdAt: String!
+    createdAt: String
     updatedAt: String
-    CreatedById: String!
+    createdById: String!
 }
 
 type PaginatedNotes {
@@ -22,7 +22,7 @@ type PaginatedNotes {
 
 type Query {
     getUser(id: ID!): GetUserResult
-    getNote(id: ID!): GetNoteResult
+    getNote(id: ID!, userId: ID!): GetNoteResult
     getUserNotes(userId: ID!, pageSize: Int, continuationToken: String): GetUserNotesResult
 }
 
@@ -71,37 +71,37 @@ type CreateUserResult {
 }
 
 type UpdateUserResult {
-    success: User
+    user: User
     errors: [Error]
 }
 
 type DeleteUserResult {
-    success: ID
+    userId: ID
     errors: [Error]
 }
 
 type CreateNoteResult {
-    success: Note
+    note: Note
     errors: [Error]
 }
 
 type GetNoteResult {
-    success: Note
+    note: Note
     errors: [Error]
 }
 
 type GetUserNotesResult {
-    success: PaginatedNotes
+    notes: PaginatedNotes
     errors: [Error]
 }
 
 type UpdateNoteResult {
-    success: Note
+    note: Note
     errors: [Error]
 }
 
 type DeleteNoteResult {
-    success: ID
+    noteId: ID
     errors: [Error]
 }
 
