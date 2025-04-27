@@ -1,0 +1,117 @@
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    createdAt: String!
+    updatedAt: String
+}
+
+type Note {
+    id: ID!
+    title: String!
+    content: String!
+    createdAt: String!
+    updatedAt: String
+    CreatedById: String!
+}
+
+type PaginatedNotes {
+    items: [Note]!
+    continuationToken: String
+}
+
+type Query {
+    getUser(id: ID!): GetUserResult
+    getNote(id: ID!): GetNoteResult
+    getUserNotes(userId: ID!, pageSize: Int, continuationToken: String): GetUserNotesResult
+}
+
+type Mutation {
+    createUser(input: CreateUserCommand!): CreateUserResult
+    updateUser(input: UpdateUserCommand!): UpdateUserResult
+    deleteUser(id: ID!): DeleteUserResult
+
+    createNote(input: CreateNoteCommand!): CreateNoteResult
+    updateNote(input: UpdateNoteCommand!): UpdateNoteResult
+    deleteNote(id: ID!, userId: ID!): DeleteNoteResult
+}
+
+input CreateUserCommand {
+    name: String!
+    email: String!
+}
+
+input UpdateUserCommand {
+    id: ID!
+    name: String
+    email: String
+}
+
+input CreateNoteCommand {
+    title: String!
+    content: String!
+    userId: ID!
+}
+
+input UpdateNoteCommand {
+    id: ID!
+    title: String
+    content: String
+    userId: ID!
+}
+
+type GetUserResult {
+    user: User
+    errors: [Error]
+}
+
+type CreateUserResult {
+    user: User
+    errors: [Error]
+}
+
+type UpdateUserResult {
+    success: User
+    errors: [Error]
+}
+
+type DeleteUserResult {
+    success: ID
+    errors: [Error]
+}
+
+type CreateNoteResult {
+    success: Note
+    errors: [Error]
+}
+
+type GetNoteResult {
+    success: Note
+    errors: [Error]
+}
+
+type GetUserNotesResult {
+    success: PaginatedNotes
+    errors: [Error]
+}
+
+type UpdateNoteResult {
+    success: Note
+    errors: [Error]
+}
+
+type DeleteNoteResult {
+    success: ID
+    errors: [Error]
+}
+
+type Error {
+    message: String!
+    code: String!
+    field: String
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+}

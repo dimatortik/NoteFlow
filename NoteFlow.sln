@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "./src", "{B95F0C06-D6EB-48EE-B2A1-C0FCB9A9575B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteFlow.Domain", "src/NoteFlow.Domain\NoteFlow.Domain.csproj", "{FEBCA8B2-3A18-4914-A784-2B2BD0CAC048}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteFlow.Application", "src/NoteFlow.Application\NoteFlow.Application.csproj", "{9F1E7202-A7C7-44BD-A634-24A7A08A96D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteFlow.Infrastructure", "src/NoteFlow.Infrastructure\NoteFlow.Infrastructure.csproj", "{450D7C77-F52C-4920-B884-94093C41ED4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteFlow.Api", "src/NoteFlow.Api\NoteFlow.Api.csproj", "{F13E4F8E-F472-4B82-A2AB-FF17C1859D2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteFlow.Lambda", "NoteFlow.Lambda\src\NoteFlow.Lambda\NoteFlow.Lambda.csproj", "{B3A9C0A8-8699-4CC3-8A67-D886F346F28A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteFlow.CDK", "NoteFlow.CDK\NoteFlow.CDK.csproj", "{3F56E3C8-8AD7-4E58-A64C-735B7E6551FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FEBCA8B2-3A18-4914-A784-2B2BD0CAC048} = {B95F0C06-D6EB-48EE-B2A1-C0FCB9A9575B}
+		{9F1E7202-A7C7-44BD-A634-24A7A08A96D4} = {B95F0C06-D6EB-48EE-B2A1-C0FCB9A9575B}
+		{450D7C77-F52C-4920-B884-94093C41ED4B} = {B95F0C06-D6EB-48EE-B2A1-C0FCB9A9575B}
+		{F13E4F8E-F472-4B82-A2AB-FF17C1859D2F} = {B95F0C06-D6EB-48EE-B2A1-C0FCB9A9575B}
+		{B3A9C0A8-8699-4CC3-8A67-D886F346F28A} = {B95F0C06-D6EB-48EE-B2A1-C0FCB9A9575B}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEBCA8B2-3A18-4914-A784-2B2BD0CAC048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEBCA8B2-3A18-4914-A784-2B2BD0CAC048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEBCA8B2-3A18-4914-A784-2B2BD0CAC048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEBCA8B2-3A18-4914-A784-2B2BD0CAC048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1E7202-A7C7-44BD-A634-24A7A08A96D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1E7202-A7C7-44BD-A634-24A7A08A96D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1E7202-A7C7-44BD-A634-24A7A08A96D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1E7202-A7C7-44BD-A634-24A7A08A96D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450D7C77-F52C-4920-B884-94093C41ED4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450D7C77-F52C-4920-B884-94093C41ED4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450D7C77-F52C-4920-B884-94093C41ED4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450D7C77-F52C-4920-B884-94093C41ED4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F13E4F8E-F472-4B82-A2AB-FF17C1859D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F13E4F8E-F472-4B82-A2AB-FF17C1859D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F13E4F8E-F472-4B82-A2AB-FF17C1859D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F13E4F8E-F472-4B82-A2AB-FF17C1859D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A9C0A8-8699-4CC3-8A67-D886F346F28A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A9C0A8-8699-4CC3-8A67-D886F346F28A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A9C0A8-8699-4CC3-8A67-D886F346F28A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A9C0A8-8699-4CC3-8A67-D886F346F28A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F56E3C8-8AD7-4E58-A64C-735B7E6551FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F56E3C8-8AD7-4E58-A64C-735B7E6551FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F56E3C8-8AD7-4E58-A64C-735B7E6551FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F56E3C8-8AD7-4E58-A64C-735B7E6551FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

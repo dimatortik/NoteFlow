@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+        <AWSProjectType>Lambda</AWSProjectType>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="8.1.1" />
+        <PackageReference Include="Amazon.Lambda.Core" Version="2.5.0"/>
+        <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.4.4"/>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\src\NoteFlow.Api\NoteFlow.Api.csproj" />
+      <ProjectReference Include="..\..\..\src\NoteFlow.Application\NoteFlow.Application.csproj" />
+      <ProjectReference Include="..\..\..\src\NoteFlow.Domain\NoteFlow.Domain.csproj" />
+      <ProjectReference Include="..\..\..\src\NoteFlow.Infrastructure\NoteFlow.Infrastructure.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Properties\" />
+    </ItemGroup>
+</Project>

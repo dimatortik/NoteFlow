@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.407.1" />
+        <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.400" />
+        <PackageReference Include="FluentValidation" Version="11.11.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+        <PackageReference Include="MediatR" Version="12.5.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\NoteFlow.Application\NoteFlow.Application.csproj" />
+      <ProjectReference Include="..\NoteFlow.Infrastructure\NoteFlow.Infrastructure.csproj" />
+      <ProjectReference Include="..\NoteFlow.Application\NoteFlow.Application.csproj" />
+      <ProjectReference Include="..\NoteFlow.Infrastructure\NoteFlow.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
